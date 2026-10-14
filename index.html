@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>澄玻 PureWave | 台灣特種玻璃雙效濾水壺</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Sans TC & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        aqua: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                        skyblue: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        },
+                        mint: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2dd4bf;
+            border-radius: 4px;
+        }
+
+        /* Slow Graceful Scroll Fade-in */
+        .reveal-slow {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal-slow.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glass Reflection Card */
+        .glass-clean {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(204, 251, 241, 0.6);
+        }
+
+        /* Continuous Dynamic Fluid Wave CTA Button */
+        .btn-fluid-wave {
+            position: relative;
+            padding: 1.125rem 2.5rem;
+            font-weight: 600;
+            color: #ffffff;
+            border-radius: 9999px;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, #0d9488 0%, #0284c7 100%);
+            box-shadow: 0 12px 28px -6px rgba(13, 148, 136, 0.35);
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            z-index: 1;
+        }
+
+        .btn-fluid-wave:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 18px 36px -8px rgba(2, 132, 199, 0.45);
+        }
+
+        .btn-fluid-wave .wave-bg-1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 100' fill='none'%3E%3Cpath d='M0,45 C150,85 350,-5 500,45 C650,95 750,15 800,45 L800,100 L0,100 Z' fill='rgba(255, 255, 255, 0.28)'/%3E%3C/svg%3E") repeat-x;
+            background-size: 400px 100%;
+            animation: waveFlow 6s linear infinite;
+            z-index: -1;
+        }
+
+        .btn-fluid-wave .wave-bg-2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 100' fill='none'%3E%3Cpath d='M0,35 C200,5 300,75 500,25 C700,-15 750,65 800,35 L800,100 L0,100 Z' fill='rgba(153, 246, 228, 0.35)'/%3E%3C/svg%3E") repeat-x;
+            background-size: 400px 100%;
+            animation: waveFlowReverse 8s linear infinite;
+            z-index: -2;
+        }
+
+        @keyframes waveFlow {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-400px); }
+        }
+
+        @keyframes waveFlowReverse {
+            0% { transform: translateX(-400px); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Gentle floating bubbles */
+        .soft-bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(45,212,191,0.25));
+            animation: floatSlow 14s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes floatSlow {
+            0% { transform: translateY(100vh) scale(0.6); opacity: 0; }
+            40% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50/50 text-slate-700 font-sans antialiased selection:bg-aqua-100 selection:text-aqua-800">
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex items-center justify-between h-24">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3.5 group">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-aqua-500 to-skyblue-400 flex items-center justify-center text-white shadow-md shadow-aqua-500/20 group-hover:scale-105 transition-transform duration-300">
+                        <i class="fa-solid fa-glass-water text-xl"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold tracking-tight text-slate-800 group-hover:text-aqua-600 transition-colors">澄玻 <span class="text-aqua-500 font-light text-xl">PureWave</span></span>
+                        <span class="text-[10px] tracking-widest text-slate-400 uppercase -mt-0.5">Taiwan Glass Pitcher</span>
+                    </div>
+                </a>
+
+                <!-- Nav Menu -->
+                <nav class="hidden md:flex items-center gap-10 text-sm font-medium text-slate-600">
+                    <a href="#concept" class="hover:text-aqua-600 transition-colors">品牌理念</a>
+                    <a href="#4ws" class="hover:text-aqua-600 transition-colors">核心 4W</a>
+                    <a href="#story" class="hover:text-aqua-600 transition-colors">台灣精造</a>
+                    <a href="#features" class="hover:text-aqua-600 transition-colors">特種玻璃與濾心</a>
+                </nav>
+
+                <!-- Header CTA -->
+                <div class="hidden sm:flex items-center">
+                    <a href="#cta-section" class="btn-fluid-wave text-sm py-2.5 px-6">
+                        <span class="wave-bg-1"></span>
+                        <span class="wave-bg-2"></span>
+                        <span>水波流動 ‧ 安心體驗</span>
+                        <i class="fa-solid fa-water text-xs opacity-90"></i>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileBtn" class="md:hidden p-2 rounded-xl text-slate-600 hover:text-aqua-600 focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileDrawer" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-b border-aqua-100 px-6 py-6 space-y-4">
+            <a href="#concept" class="block text-slate-700 hover:text-aqua-600 font-medium py-1">品牌理念</a>
+            <a href="#4ws" class="block text-slate-700 hover:text-aqua-600 font-medium py-1">核心 4W</a>
+            <a href="#story" class="block text-slate-700 hover:text-aqua-600 font-medium py-1">台灣精造</a>
+            <a href="#features" class="block text-slate-700 hover:text-aqua-600 font-medium py-1">特種玻璃與濾心</a>
+            <div class="pt-2">
+                <a href="#cta-section" class="btn-fluid-wave w-full py-3 text-center">
+                    <span class="wave-bg-1"></span>
+                    <span class="wave-bg-2"></span>
+                    <span>感受純淨水波</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center pt-32 pb-24 overflow-hidden bg-gradient-to-b from-mint-50/60 via-skyblue-50/40 to-slate-50">
+        <!-- Floating Bubbles Container -->
+        <div id="bubbleBox" class="absolute inset-0 pointer-events-none z-0"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                
+                <!-- Left Hero Text -->
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-left reveal-slow active">
+                    <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-aqua-100/70 border border-aqua-200 text-aqua-800 text-xs sm:text-sm font-semibold tracking-wide">
+                        <span class="w-2 h-2 rounded-full bg-aqua-500 animate-pulse"></span>
+                        <span>100% 台灣製造 ✕ 醫規特種玻璃 ✕ 專業過濾濾心</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-800 leading-tight tracking-tight">
+                        讓純淨如<span class="text-transparent bg-clip-text bg-gradient-to-r from-aqua-600 via-teal-500 to-skyblue-500">水波流動</span>，<br>
+                        流進每一個溫暖的家。
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        【澄玻 PureWave】家用水壺專為家庭飲水安全打造。嚴選特種玻璃壺體，結合高效雙效過濾濾心，層層阻隔管線雜質與有害物質，讓全家人每一口都喝得徹底安心。
+                    </p>
+
+                    <!-- Fluid Dynamic Wave CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 pt-4">
+                        <a href="#cta-section" class="btn-fluid-wave text-base py-4 px-9 w-full sm:w-auto">
+                            <span class="wave-bg-1"></span>
+                            <span class="wave-bg-2"></span>
+                            <span>開啟家庭安心飲水之旅</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </a>
+
+                        <a href="#concept" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-white hover:bg-slate-100 text-slate-600 font-medium text-base border border-slate-200 shadow-sm transition-all w-full sm:w-auto">
+                            <span>探索品牌理念</span>
+                            <i class="fa-solid fa-chevron-down text-xs text-slate-400"></i>
+                        </a>
+                    </div>
+
+                    <!-- Highlight Badges -->
+                    <div class="pt-8 border-t border-slate-200/60 grid grid-cols-3 gap-6 max-w-lg mx-auto lg:mx-0 text-center lg:text-left">
+                        <div>
+                            <div class="text-2xl font-bold text-aqua-600">100%</div>
+                            <div class="text-xs text-slate-500 mt-1">台灣在地精造</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-aqua-600">特種玻璃</div>
+                            <div class="text-xs text-slate-500 mt-1">耐高溫差無毒釋出</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-aqua-600">雙效濾心</div>
+                            <div class="text-xs text-slate-500 mt-1">高效過濾餘氯異味</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Realistic Product Illustration -->
+                <div class="lg:col-span-5 relative flex justify-center reveal-slow active">
+                    <div class="relative w-full max-w-md">
+                        <!-- Soft Ambient Backdrop Glow -->
+                        <div class="absolute -inset-6 rounded-full bg-gradient-to-tr from-mint-100/60 via-aqua-100/50 to-skyblue-100/60 blur-3xl -z-10"></div>
+
+                        <!-- Realistic Pitcher Display Container -->
+                        <div class="glass-clean rounded-3xl p-8 shadow-xl shadow-aqua-500/5 relative border border-white overflow-hidden text-center">
+                            
+                            <div class="flex items-center justify-between mb-4 text-xs">
+                                <span class="bg-aqua-50 border border-aqua-200 text-aqua-700 px-3 py-1 rounded-full font-semibold">特種玻璃 ✕ 內建濾心</span>
+                                <span class="text-emerald-600 font-semibold flex items-center gap-1.5">
+                                    <i class="fa-solid fa-check-circle"></i> 台灣精造
+                                </span>
+                            </div>
+
+                            <!-- Realistic Glass Pitcher & Filter Graphic (Detailed SVG) -->
+                            <div class="relative h-80 w-full flex items-center justify-center my-2">
+                                <svg class="h-full w-auto drop-shadow-2xl" viewBox="0 0 240 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Pitcher Glass Handle -->
+                                    <path d="M175 80 C 225 80, 225 220, 168 235" stroke="url(#handleGrad)" stroke-width="14" stroke-linecap="round" fill="none"/>
+                                    
+                                    <!-- Outer Special Glass Body -->
+                                    <path d="M55 50 L185 50 L170 270 C170 285, 70 285, 70 270 Z" fill="rgba(240, 253, 250, 0.45)" stroke="url(#glassOutline)" stroke-width="3.5"/>
+                                    
+                                    <!-- Glass Specular Reflection Highlight -->
+                                    <path d="M78 65 L88 65 L80 260 L73 260 Z" fill="rgba(255, 255, 255, 0.65)"/>
+                                    
+                                    <!-- Water Level Inside Pitcher -->
+                                    <path d="M72 135 Q120 128 168 135 L167 265 C167 278, 73 278, 73 265 Z" fill="rgba(14, 165, 233, 0.18)"/>
+                                    <!-- Water Surface Ripple -->
+                                    <path d="M72 135 Q120 142 168 135" stroke="#2dd4bf" stroke-width="2.5" fill="none">
+                                        <animate attributeName="d" dur="3.5s" repeatCount="indefinite"
+                                            values="M72 135 Q120 142 168 135; M72 135 Q120 128 168 135; M72 135 Q120 142 168 135"/>
+                                    </path>
+
+                                    <!-- Filter Cartridge Body Inside Reservoir -->
+                                    <rect x="92" y="65" width="56" height="85" rx="10" fill="#ffffff" stroke="#0d9488" stroke-width="2.5"/>
+                                    <!-- Filter Layers (Activated Carbon & Resin) -->
+                                    <rect x="98" y="75" width="44" height="26" rx="4" fill="#334155"/>
+                                    <text x="120" y="92" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">天然椰殼碳</text>
+                                    <rect x="98" y="105" width="44" height="26" rx="4" fill="#f59e0b" opacity="0.85"/>
+                                    <text x="120" y="122" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">無鈉樹脂</text>
+
+                                    <!-- Pitcher Lid & Spout -->
+                                    <path d="M55 50 L38 60 L55 75 Z" fill="#0d9488"/>
+                                    <rect x="50" y="42" width="140" height="12" rx="6" fill="#115e59"/>
+
+                                    <!-- Water Drop Drops Animation from Filter -->
+                                    <circle cx="120" cy="160" r="2.5" fill="#0ea5e9">
+                                        <animate attributeName="cy" values="155; 220" dur="1.8s" repeatCount="indefinite"/>
+                                        <animate attributeName="opacity" values="1;0" dur="1.8s" repeatCount="indefinite"/>
+                                    </circle>
+
+                                    <!-- Gradient Definitions -->
+                                    <defs>
+                                        <linearGradient id="handleGrad" x1="0" y1="0" x2="1" y2="1">
+                                            <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.8"/>
+                                            <stop offset="100%" stop-color="#0284c7" stop-opacity="0.6"/>
+                                        </linearGradient>
+                                        <linearGradient id="glassOutline" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="0%" stop-color="#2dd4bf"/>
+                                            <stop offset="100%" stop-color="#38bdf8"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+
+                                <!-- Floating Detail Tag 1 -->
+                                <div class="absolute top-6 right-0 bg-white/95 backdrop-blur p-2.5 rounded-2xl shadow-md border border-aqua-100 text-left text-xs">
+                                    <p class="font-bold text-slate-800 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-gem text-aqua-500"></i> 特種玻璃壺體
+                                    </p>
+                                    <p class="text-[11px] text-slate-500">醫規級高硼矽・無重金屬</p>
+                                </div>
+
+                                <!-- Floating Detail Tag 2 -->
+                                <div class="absolute bottom-6 left-0 bg-white/95 backdrop-blur p-2.5 rounded-2xl shadow-md border border-aqua-100 text-left text-xs">
+                                    <p class="font-bold text-slate-800 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-filter text-mint-500"></i> 多重精密濾心
+                                    </p>
+                                    <p class="text-[11px] text-slate-500">高效攔截餘氯與雜質</p>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-500 pt-2 font-medium">【澄玻 PureWave】特種玻璃濾水壺・純淨水流帶著走</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Concept Section -->
+    <section id="concept" class="py-28 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center max-w-3xl mx-auto mb-20 reveal-slow">
+                <span class="text-xs font-bold text-aqua-600 uppercase tracking-widest bg-aqua-50 px-3.5 py-1.5 rounded-full border border-aqua-100">Brand Concept</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-800 tracking-tight mt-4">堅持品質保證 ‧ 讓純淨觸手可及</h2>
+                <p class="mt-4 text-slate-500 text-base leading-relaxed">
+                    我們深信，好水是一切健康的根本。澄玻將特種玻璃工藝與高效濾心技術合而為一，創造安心無虞的飲水享受。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Concept 1 -->
+                <div class="bg-slate-50/80 rounded-3xl p-8 border border-slate-100 hover:border-aqua-200 hover:shadow-lg transition-all duration-300 reveal-slow">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-aqua-500 to-mint-400 text-white flex items-center justify-center text-2xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">嚴格品質保證</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        全系列產品經過 SGS 多項食品級安全檢驗，從原料到組裝，層層把關，給家人最堅實的健康防線。
+                    </p>
+                </div>
+
+                <!-- Concept 2 -->
+                <div class="bg-slate-50/80 rounded-3xl p-8 border border-slate-100 hover:border-aqua-200 hover:shadow-lg transition-all duration-300 reveal-slow">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-aqua-600 to-skyblue-500 text-white flex items-center justify-center text-2xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-gem"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">特種高硼矽玻璃</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        採用特種高硼矽玻璃材質，具備優異的熱穩定度與耐高溫差能力，零塑化劑、不吸附氣味、永不釋出化學物質。
+                    </p>
+                </div>
+
+                <!-- Concept 3 -->
+                <div class="bg-slate-50/80 rounded-3xl p-8 border border-slate-100 hover:border-aqua-200 hover:shadow-lg transition-all duration-300 reveal-slow">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-mint-500 to-teal-600 text-white flex items-center justify-center text-2xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-filter"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">雙效過濾濾心</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        壺內建精密過濾濾心，融合天然椰殼活性碳與離子交換樹脂，高效去除餘氯、重金屬與異味，保留天然好滋味。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core 4Ws Section -->
+    <section id="4ws" class="py-28 bg-gradient-to-b from-slate-50 to-mint-50/30 border-y border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center max-w-3xl mx-auto mb-20 reveal-slow">
+                <span class="text-xs font-bold text-aqua-600 uppercase tracking-widest bg-white px-3.5 py-1.5 rounded-full border border-aqua-100 shadow-sm">Core Value</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-800 tracking-tight mt-4">品牌核心 4W 定位</h2>
+                <p class="mt-4 text-slate-500 text-base">解答品牌初衷，建構最值得信賴的居家飲水標準</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- 1. Who -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 flex flex-col justify-between reveal-slow">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-aqua-100 text-aqua-700 flex items-center justify-center font-bold text-lg mb-6">
+                            Who
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">品牌為誰存在？</h3>
+                        <p class="text-aqua-600 font-semibold text-sm mb-4">為人民存在</p>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            專為重視健康、關心全家飲水安全的廣大人民與每個溫暖家庭而存在。
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-4 border-t border-slate-100 text-xs text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-users text-aqua-500"></i> 以人為本 ‧ 守護全家
+                    </div>
+                </div>
+
+                <!-- 2. What -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 flex flex-col justify-between reveal-slow">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-mint-100 text-mint-700 flex items-center justify-center font-bold text-lg mb-6">
+                            What
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">提供什麼服務？</h3>
+                        <p class="text-mint-600 font-semibold text-sm mb-4">安全、健康的服務保證</p>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            提供包含特種玻璃水壺與精密濾心的一體化水質淨化服務，承諾全方位安心保障。
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-4 border-t border-slate-100 text-xs text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-shield text-mint-500"></i> 健康承諾 ‧ 嚴格把關
+                    </div>
+                </div>
+
+                <!-- 3. Why -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 flex flex-col justify-between reveal-slow">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-skyblue-100 text-skyblue-700 flex items-center justify-center font-bold text-lg mb-6">
+                            Why
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">為什麼需要澄玻？</h3>
+                        <p class="text-skyblue-600 font-semibold text-sm mb-4">想要讓家庭用水更安全</p>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            為了解決老舊水管雜質、餘氯異味與塑膠容器釋出風險，讓家庭用水回歸純淨自然。
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-4 border-t border-slate-100 text-xs text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-heart-pulse text-skyblue-500"></i> 告別疑慮 ‧ 放心大口喝
+                    </div>
+                </div>
+
+                <!-- 4. How -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 flex flex-col justify-between reveal-slow">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-lg mb-6">
+                            How
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">如何與消費者溝通？</h3>
+                        <p class="text-teal-600 font-semibold text-sm mb-4">水壺內有濾心過濾，用水都安全</p>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            我們是一個家用水壺品牌，透過「水壺內有濾心過濾」的核心優勢，傳遞讓大家用水都安全的安心價值。
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-4 border-t border-slate-100 text-xs text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-water text-teal-500"></i> 透明對話 ‧ 水波流動
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Story Section -->
+    <section id="story" class="py-28 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="bg-gradient-to-br from-mint-50/80 via-white to-skyblue-50/80 rounded-3xl p-8 sm:p-16 border border-aqua-100 shadow-sm reveal-slow">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-6 space-y-6">
+                        <span class="text-xs font-bold text-aqua-600 uppercase tracking-widest bg-white px-3.5 py-1.5 rounded-full border border-aqua-200">Brand Story</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-slate-800">源自台灣的精造工藝，淬鍊滴滴純淨</h2>
+                        <p class="text-slate-600 text-base leading-relaxed">
+                            澄玻（PureWave）誕生於台灣。我們深刻體會到，家庭飲水是每天最平凡卻也最關鍵的滋養。
+                        </p>
+                        <p class="text-slate-600 text-base leading-relaxed">
+                            為了提供真正讓父母放心、孩子喜歡的日常好水，我們堅持採用成本更高的**特種高硼矽玻璃**製作水壺，並嚴選高效濾心材料。從產品設計、研製到品質監控，全程在台灣完成，確保每一把水壺皆符合最高的安全標準。
+                        </p>
+                        <div class="p-5 bg-white rounded-2xl border-l-4 border-aqua-500 shadow-sm text-slate-700 text-sm font-medium">
+                            「讓水波流動的優雅，伴隨台灣在地精造的堅持，流進每一個溫暖的家。」
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6 relative flex justify-center">
+                        <div class="w-full max-w-md bg-white p-6 rounded-3xl border border-slate-100 shadow-lg text-center space-y-6">
+                            <div class="w-20 h-20 rounded-full bg-aqua-50 border-2 border-aqua-200 text-aqua-600 flex items-center justify-center text-3xl mx-auto">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-800">100% 台灣在地檢驗與承諾</h3>
+                                <p class="text-slate-500 text-sm mt-2">專為台灣水質特性調校過濾配方，完美適應居家環境</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 text-xs font-semibold text-slate-600">
+                                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                    <i class="fa-solid fa-flask text-aqua-500 mb-1 text-base block"></i> 無化學重金屬溶出
+                                </div>
+                                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                    <i class="fa-solid fa-leaf text-mint-500 mb-1 text-base block"></i> 零雙酚 A / 塑化劑
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Features -->
+    <section id="features" class="py-28 bg-slate-50/70">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center max-w-3xl mx-auto mb-20 reveal-slow">
+                <span class="text-xs font-bold text-aqua-600 uppercase tracking-widest bg-white px-3.5 py-1.5 rounded-full border border-aqua-100">Product Excellence</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-800 tracking-tight mt-4">特種玻璃 ✕ 內建濾心 雙重防線</h2>
+                <p class="mt-4 text-slate-500 text-base">為全家打造無瑕飲水體驗的兩大核心技術</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Special Glass -->
+                <div class="bg-white rounded-3xl p-10 border border-slate-100 shadow-sm hover:shadow-md transition-all reveal-slow">
+                    <div class="w-14 h-14 rounded-2xl bg-skyblue-100 text-skyblue-600 flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-vial"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">1. 醫規級特種玻璃壺身</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                        選用高穩定特種高硼矽玻璃，可承受 400°C 劇烈溫差變化。熱水直沖不破裂，冷藏冰鎮不變質。質地清透，不留水垢與殘留異味。
+                    </p>
+                    <ul class="space-y-3 text-xs text-slate-500">
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-aqua-500"></i> 通過嚴格熱震測試，安全耐用</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-aqua-500"></i> 質地晶瑩光滑，清潔一沖即淨</li>
+                    </ul>
+                </div>
+
+                <!-- Integrated Filter -->
+                <div class="bg-white rounded-3xl p-10 border border-slate-100 shadow-sm hover:shadow-md transition-all reveal-slow">
+                    <div class="w-14 h-14 rounded-2xl bg-mint-100 text-mint-600 flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-droplet font-bold"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">2. 壺內雙效精密濾心</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                        壺內搭載多重高效濾心，融合天然椰殼活性碳與無鈉離子交換樹脂，有效過濾水中餘氯、重金屬（鉛、銅）與雜質，保留天然回甘風味。
+                    </p>
+                    <ul class="space-y-3 text-xs text-slate-500">
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-mint-500"></i> 高速透水技術，數分鐘滿壺流暢過濾</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-mint-500"></i> 軟化硬水口感，讓每一口都滑順好喝</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta-section" class="py-28 bg-gradient-to-br from-teal-800 via-aqua-800 to-slate-900 text-white relative overflow-hidden">
+        <!-- Background Fluid Ripple SVG -->
+        <div class="absolute inset-0 pointer-events-none opacity-15">
+            <svg class="w-full h-full" viewBox="0 0 1440 400" fill="none">
+                <path d="M0,160L80,176C160,192,320,224,480,213.3C640,203,800,149,960,138.7C1120,128,1280,160,1360,176L1440,192L1440,400L1360,400C1280,400,1120,400,960,400C800,400,640,400,480,400C320,400,160,400,80,400L0,400Z" fill="#99f6e4"></path>
+            </svg>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10 space-y-8 reveal-slow">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur border border-white/20 text-aqua-200 text-sm font-medium">
+                🌊 翻湧純淨 ‧ 水波流動
+            </div>
+
+            <h2 class="text-3xl sm:text-5xl font-bold tracking-tight leading-tight">
+                讓純淨如水波流動，<br>流進每一個溫暖的家。
+            </h2>
+
+            <p class="text-slate-200 text-base sm:text-lg max-w-xl mx-auto font-light leading-relaxed">
+                【澄玻 PureWave】特種玻璃雙效水濾壺，給您與家人看得見的純淨保障。
+            </p>
+
+            <!-- Main Fluid Wave Flow Button -->
+            <div class="pt-4 flex flex-col items-center justify-center gap-4">
+                <button id="mainCtaBtn" class="btn-fluid-wave text-lg py-5 px-10 shadow-2xl scale-105">
+                    <span class="wave-bg-1"></span>
+                    <span class="wave-bg-2"></span>
+                    <span class="tracking-wide">點擊體驗水波流動的純淨安心 🌊</span>
+                </button>
+                <p class="text-xs text-slate-300/80">⚡ 100% 台灣製造 ‧ 特種玻璃 ‧ 嚴選濾心品質保證</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order/Inquiry Modal -->
+    <div id="ctaModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl border border-slate-100 relative">
+            <button id="closeCtaModal" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 text-xl p-2">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center space-y-3 mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-aqua-50 text-aqua-600 flex items-center justify-center text-2xl mx-auto">
+                    <i class="fa-solid fa-glass-water"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-800">開啟全家人安心飲水之旅</h3>
+                <p class="text-slate-500 text-xs">請留下您的資訊，我們將為您提供台灣原廠首購體驗優惠！</p>
+            </div>
+
+            <form id="contactForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">您的姓名</label>
+                    <input type="text" required placeholder="請輸入姓名" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-aqua-500 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">聯絡電話 / 電子信箱</label>
+                    <input type="text" required placeholder="例如: 0912-345-678" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-aqua-500 text-sm">
+                </div>
+                <button type="submit" class="btn-fluid-wave w-full py-3.5 mt-2 text-base">
+                    <span class="wave-bg-1"></span>
+                    <span class="wave-bg-2"></span>
+                    <span>送出並獲取專屬優惠</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2.5 text-white font-bold text-xl">
+                        <i class="fa-solid fa-glass-water text-aqua-400"></i>
+                        <span>澄玻 PureWave</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        深耕台灣的家用水壺品牌。以特種玻璃與壺內濾心過濾，讓大家用水都安全。
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-3">產品特色</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#features" class="hover:text-white transition-colors">特種高硼矽玻璃</a></li>
+                        <li><a href="#features" class="hover:text-white transition-colors">壺內雙效精密濾心</a></li>
+                        <li><a href="#story" class="hover:text-white transition-colors">100% 台灣在地精造</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-3">品牌理念 (4Ws)</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#4ws" class="hover:text-white transition-colors">Who - 為人民存在</a></li>
+                        <li><a href="#4ws" class="hover:text-white transition-colors">What - 安全健康服務</a></li>
+                        <li><a href="#4ws" class="hover:text-white transition-colors">Why - 家庭用水更安全</a></li>
+                        <li><a href="#4ws" class="hover:text-white transition-colors">How - 水壺內濾心過濾</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-3">客服與聯繫</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        服務專線：0800-000-888<br>
+                        服務時間：週一至週五 09:00 - 18:00
+                    </p>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
+                &copy; 2026 澄玻 PureWave 版權所有。Made in Taiwan.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Client Scripts -->
+    <script>
+        // Create soft floating bubbles
+        const bubbleBox = document.getElementById('bubbleBox');
+        for (let i = 0; i < 12; i++) {
+            const b = document.createElement('div');
+            b.className = 'soft-bubble';
+            const sz = Math.random() * 20 + 8;
+            b.style.width = `${sz}px`;
+            b.style.height = `${sz}px`;
+            b.style.left = `${Math.random() * 100}%`;
+            b.style.animationDelay = `${Math.random() * 10}s`;
+            b.style.animationDuration = `${Math.random() * 8 + 10}s`;
+            bubbleBox.appendChild(b);
+        }
+
+        // Graceful Slow Reveal Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        document.querySelectorAll('.reveal-slow').forEach(el => observer.observe(el));
+
+        // Mobile Drawer Toggle
+        const mobileBtn = document.getElementById('mobileBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        mobileBtn.addEventListener('click', () => {
+            mobileDrawer.classList.toggle('hidden');
+        });
+
+        // CTA Modal Handlers
+        const mainCtaBtn = document.getElementById('mainCtaBtn');
+        const ctaModal = document.getElementById('ctaModal');
+        const closeCtaModal = document.getElementById('closeCtaModal');
+        const contactForm = document.getElementById('contactForm');
+
+        mainCtaBtn.addEventListener('click', () => {
+            ctaModal.classList.remove('hidden');
+        });
+
+        closeCtaModal.addEventListener('click', () => {
+            ctaModal.classList.add('hidden');
+        });
+
+        ctaModal.addEventListener('click', (e) => {
+            if (e.target === ctaModal) ctaModal.classList.add('hidden');
+        });
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Custom Toast Alert
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-8 right-8 bg-slate-900 text-white px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3 border border-aqua-400 animate-bounce';
+            toast.innerHTML = '<i class="fa-solid fa-circle-check text-mint-400 text-xl"></i> <div><p class="font-bold text-sm">預約成功！</p><p class="text-xs text-slate-300">專屬飲水顧問將儘速與您聯繫。</p></div>';
+            document.body.appendChild(toast);
+
+            ctaModal.classList.add('hidden');
+            contactForm.reset();
+
+            setTimeout(() => toast.remove(), 4000);
+        });
+
+        // Navbar Scroll Styling
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 30) {
+                navbar.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'h-20');
+            } else {
+                navbar.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'h-20');
+            }
+        });
+    </script>
+</body>
+</html>
